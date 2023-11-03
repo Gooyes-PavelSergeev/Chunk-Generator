@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85cd2a3177ea2d443a056456773888ac, type: 3}
+  m_Name: Chunk Data
+  m_EditorClassIdentifier: 
+  worldSize: {x: 2, y: 2}
+  textures:
+  - {fileID: 2800000, guid: a207d850508a70c46b922ceafbea7a7b, type: 3}
+  - {fileID: 2800000, guid: a7b05dec520c8cf4c8e08dfef1f84db4, type: 3}
+  - {fileID: 2800000, guid: 46cc1e28981d28949961007cbc078393, type: 3}
+  - {fileID: 2800000, guid: dca83dcb27c238d4b807b4746e7f6ffe, type: 3}
+  - {fileID: 2800000, guid: 83dde0a0a7b84a748abb0f5e31467c41, type: 3}
+  - {fileID: 2800000, guid: b30ef1b99587eb844b863df6c6535bd7, type: 3}
+  - {fileID: 2800000, guid: 7bd486cf36b61954d9012c6704ab80a4, type: 3}
+  - {fileID: 2800000, guid: 9234305f12ded3442b911c3ff978d340, type: 3}
+  _obstaclesRange: {x: 1, y: 10}
+  _decorationsRange: {x: 1, y: 10}
