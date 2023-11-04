@@ -1,2 +1,2 @@
 # ChunkGenerator
-![Gameplay](Chunk generator gameplay.mp4)
+![![Watch the video]](gameplay.mp4)
