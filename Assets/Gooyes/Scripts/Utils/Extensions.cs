@@ -104,7 +104,7 @@ namespace GooyesPlugin
             return new Vector3(initialPos.x + offset.x, initialPos.y + offset.y, initialPos.z);
         }
 
-        public static bool NotNullAndEmpty(this string str)
+        public static bool Valid(this string str)
         {
             return !string.IsNullOrEmpty(str);
         }

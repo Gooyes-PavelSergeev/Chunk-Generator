@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85cd2a3177ea2d443a056456773888ac, type: 3}
   m_Name: Chunk Data
   m_EditorClassIdentifier: 
-  worldSize: {x: 2, y: 2}
+  worldSize: {x: 4, y: 4}
   textures:
   - {fileID: 2800000, guid: a207d850508a70c46b922ceafbea7a7b, type: 3}
   - {fileID: 2800000, guid: a7b05dec520c8cf4c8e08dfef1f84db4, type: 3}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GooyesPlugin;
+using UnityEngine;
 
 namespace CG
 {
@@ -12,13 +13,18 @@ namespace CG
         [SerializeField] private float _walkSpeed = 3.0f;
         [SerializeField] private float _sprintSpeed = 6.0f;
 
+        [SerializeField] private Animator _animator;
+
         private CharacterController _characterController;
 
         private Vector3 _moveDirection;
         private Vector2 _currentInput;
 
+        private float _currentSpeed;
+
         private void Start()
         {
+            _currentSpeed = 0f;
             _characterController = GetComponent<CharacterController>();
         }
 
@@ -28,23 +34,21 @@ namespace CG
             {
                 HandleMovement();
             }
+            _animator.SetFloat("Speed", _currentSpeed);
         }
 
         private void HandleMovement()
         {
-            _currentInput = new Vector2(
-                (IsSprinting ? _sprintSpeed : _walkSpeed) * Input.GetAxis("Vertical"),
-                (IsSprinting ? _sprintSpeed : _walkSpeed) * Input.GetAxis("Horizontal"));
+            _currentInput = new Vector2(Input.GetAxis("Vertical"), Input.GetAxis("Horizontal"));
+            if (_currentInput.magnitude < 0.01f) return;
 
-            float moveDirectionY = _moveDirection.y;
+            if (_currentInput.magnitude > 1) _currentInput.Normalize();
+            Vector2 speedVector = _currentInput * (IsSprinting ? _sprintSpeed : _walkSpeed);
 
-            _moveDirection =
-                (transform.TransformDirection(Vector3.forward) * _currentInput.x) +
-                (transform.TransformDirection(Vector3.right) * _currentInput.y);
-
-            _moveDirection.y = moveDirectionY;
-
+            _moveDirection = new Vector3(speedVector.y, 0, speedVector.x);
             _characterController.Move(_moveDirection * Time.deltaTime);
+            _currentSpeed = _moveDirection.magnitude / _sprintSpeed;
+            transform.eulerAngles = new Vector3(0, Mathf.Atan2(_currentInput.y, _currentInput.x) * Mathf.Rad2Deg, 0);
         }
     }
 }
