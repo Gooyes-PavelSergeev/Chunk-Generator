@@ -18,7 +18,7 @@ namespace CG
         {
             _offset = transform.position - _player.transform.position;
             _chunkDrawMap = new Dictionary<Vector2Int, Chunk>();
-            _chunkSpawnGridDistance = Mathf.RoundToInt(_chunkSpawnDistance / Configs.Instance.Chunk.worldSize.x);
+            _chunkSpawnGridDistance = Mathf.RoundToInt(_chunkSpawnDistance / Configs.Instance.Chunk.worldChunkSize.x);
             StartCoroutine(DrawerRoutine());
         }
 
@@ -47,7 +47,7 @@ namespace CG
                 {
                     if (!_chunkDrawMap.ContainsKey(pos))
                     {
-                        Chunk chunk = GameManager.Instance.ChunkGenerator.GenerateChunk(pos);
+                        Chunk chunk = GameManager.Instance.WorldGenerator.GenerateChunk(pos);
                         _chunkDrawMap[pos] = chunk;
                     }
                 }
@@ -57,7 +57,7 @@ namespace CG
 
         private List<Vector2Int> GetGridPositions()
         {
-            Vector3 normalizedCurrent = _player.transform.position / Configs.Instance.Chunk.worldSize.x;
+            Vector3 normalizedCurrent = _player.transform.position / Configs.Instance.Chunk.worldChunkSize.x;
             Vector2Int current = new Vector2Int(
                 Mathf.RoundToInt(normalizedCurrent.x) - _chunkSpawnGridDistance / 2,
                 Mathf.RoundToInt(normalizedCurrent.z) - _chunkSpawnGridDistance / 2);

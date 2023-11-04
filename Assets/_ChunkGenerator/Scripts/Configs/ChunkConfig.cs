@@ -5,25 +5,36 @@ namespace CG
     [CreateAssetMenu(fileName = "Chunk Data", menuName = "Configs/Chunk Data")]
     public class ChunkConfig : ScriptableObject
     {
-        public Vector2 worldSize = new Vector2(10, 10);
+        public Vector2 worldChunkSize = new Vector2(4, 4);
         public Texture[] textures;
 
-        [SerializeField] private Vector2Int _obstaclesRange;
-        [SerializeField] private Vector2Int _decorationsRange;
+        public int obstaclesAvailable;
+        public int decorationsAvailable;
 
-        public int GetNumberOfObstacles(int chunkSeed)
+        [SerializeField] private AnimationCurve _obstaclesDistribution;
+        [SerializeField] private AnimationCurve _decorationsDistribution;
+        [SerializeField] private AnimationCurve _wallDistribution;
+
+        public int GetNumberOfObstacles(System.Random rnd)
         {
-            System.Random r = new System.Random(chunkSeed);
-            int num = r.Next(_obstaclesRange.x, _obstaclesRange.y);
-            return num;
+            int num = rnd.Next(0, 100);
+            int result = Mathf.RoundToInt(_obstaclesDistribution.Evaluate(num / 100f));
+            return result;
         }
 
-        public int GetNumberOfDecorations(int chunkSeed)
+        public int GetNumberOfDecorations(System.Random rnd)
         {
-            System.Random r = new System.Random(chunkSeed);
-            r.Next();
-            int num = r.Next(_decorationsRange.x, _decorationsRange.y);
-            return num;
+            int num = rnd.Next(0, 100);
+            int result = Mathf.RoundToInt(_decorationsDistribution.Evaluate(num / 100f));
+            return result;
+        }
+
+        public int GetNumberOfWalls(System.Random rnd)
+        {
+            int num = rnd.Next(0, 100);
+            int result = Mathf.RoundToInt(_wallDistribution.Evaluate(num / 100f));
+            if (result > 4) throw new System.Exception("Cant be more then 4 walls");
+            return result;
         }
     }
 }
